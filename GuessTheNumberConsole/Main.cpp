@@ -2,6 +2,12 @@
 #include <string>
 #include <random>
 
+// TODO
+// - Make a std::cin reset function
+// - Comment code more
+//
+
+
 // Prints out the Main Menu and returns the users choice
 std::string MainMenu(void)
 {
@@ -20,20 +26,23 @@ std::string MainMenu(void)
 	std::cout << "3 - Hard (1 - 100)" << std::endl;
 	std::cout << "0 - Quit" << std::endl;
 
-	std::cout << std::endl << "Choice (1, 2, 3, or 0 (zero) to Quit): ";
+	std::cout << std::endl << "Choice (1, 2, 3, or 0): ";
 
 	// Get input from user
 	std::cin >> input;
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-	// Check for valid input, length is 1
-	if (input.length() > 1)
+	// Check for valid input
+	int test;
+	test = std::cin.peek();
+	if (test != '\n')
 	{
 		mode = "Unknown";
+		// Clear and errors in std::cin
+		std::cin.clear();
+		// Clear out std::cin
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	}
-
-	// Process valid user input
-	else if (input == "1") //.compare("1") == 0)
+	else if (input.compare("1") == 0)
 	{
 		mode = "Easy";
 	}
@@ -88,6 +97,7 @@ unsigned int GetUserInputPromptForGame(const unsigned int guesses, const unsigne
 	{
 		// Return a bad input flag
 		userGuess = 999999;
+		// Clear the std::cin error flags
 		std::cin.clear();
 		// Clear the std::cin buffer
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
