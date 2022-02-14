@@ -18,15 +18,22 @@ std::string MainMenu(void)
 	std::cout << "1 - Easy (1 - 10)" << std::endl;
 	std::cout << "2 - Medium (1 - 50)" << std::endl;
 	std::cout << "3 - Hard (1 - 100)" << std::endl;
+	std::cout << "0 - Quit" << std::endl;
 
-	std::cout << std::endl << "Choice (1, 2, 3, or 'Q' to Quit): ";
+	std::cout << std::endl << "Choice (1, 2, 3, or 0 (zero) to Quit): ";
 
 	// Get input from user
 	std::cin >> input;
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-	// Process user input
-	if (input.compare("1") == 0)
+	// Check for valid input, length is 1
+	if (input.length() > 1)
+	{
+		mode = "Unknown";
+	}
+
+	// Process valid user input
+	else if (input == "1") //.compare("1") == 0)
 	{
 		mode = "Easy";
 	}
@@ -38,8 +45,7 @@ std::string MainMenu(void)
 	{
 		mode = "Hard";
 	}
-	else if ((input.compare("q") == 0) ||
-		(input.compare("Q") == 0))
+	else if (input.compare("0") == 0)
 	{
 		mode = "Quit";
 	}
@@ -71,19 +77,41 @@ unsigned int GetUserInputPromptForGame(const unsigned int guesses, const unsigne
 	// Print out the guess prompts
 	std::cout << "Guesses so far: " << guesses << std::endl;
 	std::cout << "Choose a number between " << minimumNumber << " and " << maximumNumber << ". Enter 0 (zero) to quit: ";
+	
 	// Get user input for guess
 	std::cin >> userGuess;
-	
-	// Check to see if guess is valid (a number in this case)
+
+	// Check if more than a number was entered
+	int test;
+	test = std::cin.peek();
+	if (test != '\n')
+	{
+		// Return a bad input flag
+		userGuess = 999999;
+		std::cin.clear();
+		// Clear the std::cin buffer
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		// Decoration thing
+		std::cout << std::endl;
+		return userGuess;
+	}
+
+	// Clear the std::cin stream
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+	// Check for valid input (non integer number)
 	if (std::cin.fail())
 	{
 		// Clear the std::cin error flags
 		std::cin.clear();
 		// Clear the std::cin input buffer
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		// Flag userGuess as bad input, 999999 is just a random number chosen by me
 		userGuess = 999999;
 	}
+
+
+	// Just a decoration thing
 	std::cout << std::endl;
 	return userGuess;
 }
@@ -182,6 +210,8 @@ int main(void)
 				isValidChoice = true;
 			}
 		} while (!isValidChoice);
+		// Need to reset this flag to false as we can come back to this menu
+		isValidChoice = false;
 
 		// Process the user's choice
 		if (choice.compare("Quit") == 0)
