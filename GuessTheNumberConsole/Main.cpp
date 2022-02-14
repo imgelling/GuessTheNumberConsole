@@ -23,6 +23,7 @@ std::string MainMenu(void)
 
 	// Get input from user
 	std::cin >> input;
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
 	// Process user input
 	if (input.compare("1") == 0)
