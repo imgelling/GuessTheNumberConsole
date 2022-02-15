@@ -2,9 +2,23 @@
 #include <string>
 #include <random>
 
-// TODO
-// - Comment code more
-//
+/*
+ABOUT:	
+	This is the classic number guessing game.  Given a range, 1 - 10 (inclusive) for example, a random number is chosen in the range 
+of the numbers.  The user needs to guess what number is chosen.  If incorrect, the user is told wether the random number is less or 
+greater than the number guessed.  If correct, a "You win" message is shown and user is taken back to the main menu.  The number of 
+guesses is tracked for a "score."
+
+NOTES:
+	- This was created for my YouTube channel for a easy game series.  It is NOT intended to be the best and best way to do 
+	any of this.  It is for entertainment purposes only
+	- This was written in MSVS 2022.  It may compile on other platforms with other compilers.  I have not tested but as simple
+	as this is, it should work with any C++ compiler and platform with a console window. 
+	- I took some time to make sure all input is validated for what the program is expecting.  Probably didn't think of everything.
+
+LICENSE:
+???
+*/
 
 // Empties out std::cin and clears any error flags
 void ResetStdCin(void)
@@ -20,10 +34,10 @@ void ResetStdCin(void)
 std::string MainMenu(void)
 {
 	// The user choice when input
-	std::string input = "";
+	std::string input;
 
 	// The user choice in a meaningful way
-	std::string mode = "";
+	std::string mode;
 
 	// Print the main menu
 	std::cout << "Guess The Number!" << std::endl;
@@ -121,9 +135,9 @@ unsigned int GetUserInputPromptForGame(const unsigned int guesses, const unsigne
 		userGuess = 999999;
 	}
 
-
 	// Just a decoration thing
 	std::cout << std::endl;
+
 	return userGuess;
 }
 
@@ -185,14 +199,14 @@ void PlayGame(const unsigned int numberToGuess, const unsigned int minimumNumber
 int main(void)
 {
 	// User inputted choice
-	std::string choice = "";
+	std::string choice;
 	// Was user choice a valid choice
 	bool isValidChoice = false;
 	// Minimum number for random generation
 	unsigned int minimumNumber = 0;
 	// Maximum number for random generation
 	unsigned int maximumNumber = 0;
-	// Number to guess
+	// Randomly generated number to guess
 	unsigned int numberToGuess = 0;
 
 	// Get the system time for random-ish seed 
@@ -211,18 +225,13 @@ int main(void)
 			// Is the user choice valid?
 			if (choice.compare("Invalid") == 0)
 			{
-				// No
 				std::cout << "Please enter a valid choice." << std::endl << std::endl;
-				choice = "";
 			}
 			else
 			{
-				// Yes, it is valid.
 				isValidChoice = true;
 			}
 		} while (!isValidChoice);
-		// Need to reset this flag to false as we can come back to this menu
-		isValidChoice = false;
 
 		// Process the user's choice
 		if (choice.compare("Quit") == 0)
