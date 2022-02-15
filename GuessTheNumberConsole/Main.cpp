@@ -3,9 +3,17 @@
 #include <random>
 
 // TODO
-// - Make a std::cin reset function
 // - Comment code more
 //
+
+// Empties out std::cin and clears any error flags
+void ResetStdCin(void)
+{
+	// Clear and errors in std::cin
+	std::cin.clear();
+	// Clear out std::cin
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
 
 
 // Prints out the Main Menu and returns the users choice
@@ -32,15 +40,9 @@ std::string MainMenu(void)
 	std::cin >> input;
 
 	// Check for valid input
-	int test;
-	test = std::cin.peek();
-	if (test != '\n')
+	if (std::cin.peek() != '\n')
 	{
-		mode = "Unknown";
-		// Clear and errors in std::cin
-		std::cin.clear();
-		// Clear out std::cin
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		mode = "Invalid";
 	}
 	else if (input.compare("1") == 0)
 	{
@@ -60,8 +62,11 @@ std::string MainMenu(void)
 	}
 	else
 	{
-		mode = "Unknown";
+		mode = "Invalid";
 	}
+
+	// Clear out anything left in std::cin
+	ResetStdCin();
 
 	// Output what the user chose.
 	std::cout << std::endl << "You chose " << mode << std::endl;
@@ -91,16 +96,14 @@ unsigned int GetUserInputPromptForGame(const unsigned int guesses, const unsigne
 	std::cin >> userGuess;
 
 	// Check if more than a number was entered
-	int test;
-	test = std::cin.peek();
-	if (test != '\n')
+	if (std::cin.peek() != '\n')
 	{
 		// Return a bad input flag
 		userGuess = 999999;
-		// Clear the std::cin error flags
-		std::cin.clear();
-		// Clear the std::cin buffer
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		
+		// Clear out anything left in std::cin
+		ResetStdCin();
+
 		// Decoration thing
 		std::cout << std::endl;
 		return userGuess;
@@ -112,11 +115,9 @@ unsigned int GetUserInputPromptForGame(const unsigned int guesses, const unsigne
 	// Check for valid input (non integer number)
 	if (std::cin.fail())
 	{
-		// Clear the std::cin error flags
-		std::cin.clear();
-		// Clear the std::cin input buffer
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		// Flag userGuess as bad input, 999999 is just a random number chosen by me
+		// Clear out anything left in std::cin
+		ResetStdCin();
+		// Return a bad input flag
 		userGuess = 999999;
 	}
 
@@ -170,12 +171,12 @@ void PlayGame(const unsigned int numberToGuess, const unsigned int minimumNumber
 		// Check if user's guess is less than the number to guess
 		else if (guess < numberToGuess)
 		{
-			std::cout << "Not that one!  The number is greater than that!  Try again!" << std::endl;
+			std::cout << guess << " is NOT the number!  The number is greater than that!  Try again!" << std::endl;
 		}
 		// Check if user's guess is greater than the number to guess
 		else if (guess > numberToGuess)
 		{
-			std::cout << "Not that one!  The number is less than that!  Try again!" << std::endl;
+			std::cout << guess << " is NOT the number!  The number is less than that!  Try again!" << std::endl;
 		}
 
 	} while (isGamePlaying);
@@ -208,7 +209,7 @@ int main(void)
 			choice = MainMenu();
 			
 			// Is the user choice valid?
-			if (choice.compare("Unknown") == 0)
+			if (choice.compare("Invalid") == 0)
 			{
 				// No
 				std::cout << "Please enter a valid choice." << std::endl << std::endl;
