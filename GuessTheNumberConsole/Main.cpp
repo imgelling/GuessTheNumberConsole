@@ -12,12 +12,34 @@ guesses is tracked for a "score."
 NOTES:
 	- This was created for my YouTube channel for a easy game series.  It is NOT intended to be the best and best way to do 
 	any of this.  It is for entertainment purposes only
-	- This was written in MSVS 2022.  It may compile on other platforms with other compilers.  I have not tested but as simple
+	- This was written in MSVS 2022.  It may compile on other platforms with other compilers.  I have not tested it but as simple
 	as this is, it should work with any C++ compiler and platform with a console window. 
 	- I took some time to make sure all input is validated for what the program is expecting.  Probably didn't think of everything.
 
 LICENSE:
-???
+	This software is released under the MIT License stated below...
+
+	MIT License
+
+	Copyright (c) 2022 ImGelling
+	
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+	
+	The above copyright notice and this permission notice shall be included in all
+	copies or substantial portions of the Software.
+	
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+	SOFTWARE.
 */
 
 // Empties out std::cin and clears any error flags
