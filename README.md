@@ -8,6 +8,6 @@ message is shown and user is taken back to the main menu.  The number of guesses
 # Other
 &emsp;\- This was created for my YouTube channel for a easy game series.  It is NOT intended to be the best or best way to do any of this.  It is for entertainment purposes only.  
 &emsp;\- This contains a solution for MSVS2022.  If you are using something else, just download the main.cpp.  
-&emsp;	\- Although this was written in MSVS 2022.  It may compile on other platforms with other compilers.  I have not tested it but as simple as this is, it should work with any C++ compiler and platform with a console window.  
+&emsp;\- Although this was written in MSVS 2022.  It may compile on other platforms with other compilers.  I have not tested it but as simple as this is, it should work with any C++ compiler and platform with a console window.  
 &emsp;	\- I took some time to make sure all input is validated for what the program is expecting.  Probably didn't think of everything.  
 
